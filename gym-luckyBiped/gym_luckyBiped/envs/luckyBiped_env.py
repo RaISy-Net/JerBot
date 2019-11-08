@@ -35,6 +35,18 @@ class luckyBipedEnv(gym.Env):
 
         self.seed()
 
+        self.dog = pybullet.loadURDF(
+            currentdir+"/urdf/luckybiped.urdf", [0, 0, 1.09], flags=pybullet.URDF_USE_SELF_COLLISION)
+        self.plane = pybullet.loadURDF(os.path.join(
+            pybullet_data.getDataPath(), "plane.urdf"), 0, 0, 0)
+        self.numJoints = pybullet.getNumJoints(self.dog)
+        self.timeStep = 1.0/240
+        self.currentSimTime = 0.0
+        #pybullet.setJointMotorControl2(self.cartpole, 1, pybullet.VELOCITY_CONTROL, force=0)
+        pybullet.setGravity(0, 0, -10)
+        # pybullet.setTimeStep(self.timeStep)
+        pybullet.setRealTimeSimulation(0)
+
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
         return [seed]
@@ -87,29 +99,22 @@ class luckyBipedEnv(gym.Env):
 
         done = self.currentSimTime > 100.0 or hasFallen or hasFallenOrient or np.isnan(bodyx)
 
-        reward = np.nan_to_num(pos[0]-self.previousPos[0])
+        reward = np.nan_to_num(pos[0]-self.previousPos[0])*100
+        # reward = 1
 
         if hasFallen or hasFallenOrient:
-            reward = reward - 5.0
+            reward = reward - 500.0
 
         self.previousPos = pos
 
         return self.stateToReturn, reward, done, {}
 
     def reset(self):
-        if(self.renders):
-            pybullet.resetSimulation()
-        self.dog = pybullet.loadURDF(
-            currentdir+"/urdf/luckybiped.urdf", [0, 0, 2], flags=pybullet.URDF_USE_SELF_COLLISION)
-        self.plane = pybullet.loadURDF(os.path.join(
-            pybullet_data.getDataPath(), "plane.urdf"), 0, 0, 0)
-        self.numJoints = pybullet.getNumJoints(self.dog)
-        self.timeStep = 0.01
         self.currentSimTime = 0.0
-        #pybullet.setJointMotorControl2(self.cartpole, 1, pybullet.VELOCITY_CONTROL, force=0)
-        pybullet.setGravity(0, 0, -0.1)
-        pybullet.setTimeStep(self.timeStep)
-        pybullet.setRealTimeSimulation(0)
+        pybullet.resetBasePositionAndOrientation(self.dog, [0, 0, 1.09], [0, 0, 0, 1])
+        for i in range(10):
+            pybullet.resetJointState(self.dog, i, 0, 0)
+
         pos, rot = pybullet.getBasePositionAndOrientation(self.dog)
         self.previousPos = pos
         #initialCartPos = self.np_random.uniform(low=-0.5, high=0.5, size=(1,))
