@@ -46,7 +46,7 @@ def return_random_agents(num_agents):
         
         agents.append(agent)
     return agents
-def run1(agents, envi, human=False):
+def run1(agents, envi, human=False, delaytime=1):
     reward_agents = []
     for agent in agents:
         agent.eval() # I think to set it to evaluation mode and not to training mode
@@ -54,7 +54,7 @@ def run1(agents, envi, human=False):
         rew=0
         while True:
             if(human):
-                sleep(1)
+                sleep(delaytime)
             observation = torch.tensor(observation)
             inp = observation.type('torch.FloatTensor').view(1,-1)             
             action = agent(inp).detach().numpy()[0]
@@ -192,65 +192,63 @@ def return_children(agents, sorted_parent_indexes, elite_index):
 
 # %time return_children(agents, sorted_parent_indexes, elite_index)
 
+if __name__ == "__main__": 
 
-game = 'gym_luckyBiped:luckyBiped-v0'
-env = gym.make(game)
+    game = 'gym_luckyBiped:luckyBiped-v0'
+    env = gym.make(game)
 
 
-game_observation = env.observation_space.shape[0]
-game_actions = env.action_space.shape[0]
+    game_observation = env.observation_space.shape[0]
+    game_actions = env.action_space.shape[0]
 
-# print(env.observation_space)
-# print(env.action_space)
-# print(env.observation_space.low, env.observation_space.high)
-# print(env.action_space.low, env.action_space.high)
-# print(env.action_space.sample())
+    # print(env.observation_space)
+    # print(env.action_space)
+    # print(env.observation_space.low, env.observation_space.high)
+    # print(env.action_space.low, env.action_space.high)
+    # print(env.action_space.sample())
 
-#disable gradients as we will not use them
-torch.set_grad_enabled(False)
+    #disable gradients as we will not use them
+    torch.set_grad_enabled(False)
 
-no_of_cores = 1
-# initialize N number of agents
-num_agents = 800
-agents = return_random_agents(num_agents)
+    no_of_cores = 1
+    # initialize N number of agents
+    num_agents = 200
+    agents = return_random_agents(num_agents)
 
-# How many top agents to consider as parents
-top_limit = 20
+    # How many top agents to consider as parents
+    top_limit = 20
 
-mutation_rate = 0.05
-#     mutation_power = 0.02 #hyper-parameter, set from https://arxiv.org/pdf/1712.06567.pdf  
+    mutation_rate = 0.05
+    #     mutation_power = 0.02 #hyper-parameter, set from https://arxiv.org/pdf/1712.06567.pdf  
 
-# run evolution until X generations
-generations = 50
+    # run evolution until X generations
+    generations = 50
 
-elite_index = None
-for generation in range(generations):
-    # return rewards of agents
-    rewards = run_agents_n_times(agents, 1) #return average of 3 runs
-    print('RAN ALL AGENTS')
+    elite_index = None
+    for generation in range(generations):
+        # return rewards of agents
+        rewards = run_agents_n_times(agents, 1) #return average of 3 runs
+        print('RAN ALL AGENTS')
 
-    # sort by rewards
-    sorted_parent_indexes = np.argsort(rewards)[::-1][:top_limit] #reverses and gives top values (argsort sorts by ascending by default) https://stackoverflow.com/questions/16486252/is-it-possible-to-use-argsort-in-descending-order
-    # [ 92 785 321 682 342  27 946 464  41  21 867 774 893 431 628 399 997 708 820 739]
-    
-    top_rewards = []
-    for best_parent in sorted_parent_indexes:
-        top_rewards.append(rewards[best_parent])
-    
-    print("Generation ", generation, " | Mean rewards: ", int(np.mean(rewards)), " | Mean of top 5: ",int(np.mean(top_rewards[:5])), " | Mean of top ",top_limit," : ", int(np.mean(top_rewards[:top_limit])))
-    print("Top ",top_limit," scores", sorted_parent_indexes)
-    print("Rewards for top: ",np.array(top_rewards).astype(int))
-    
-    # setup an empty list for containing children agents
-    children_agents, elite_index = return_children(agents, sorted_parent_indexes, elite_index)
+        # sort by rewards
+        sorted_parent_indexes = np.argsort(rewards)[::-1][:top_limit] #reverses and gives top values (argsort sorts by ascending by default) https://stackoverflow.com/questions/16486252/is-it-possible-to-use-argsort-in-descending-order
+        # [ 92 785 321 682 342  27 946 464  41  21 867 774 893 431 628 399 997 708 820 739]
+        
+        top_rewards = []
+        for best_parent in sorted_parent_indexes:
+            top_rewards.append(rewards[best_parent])
+        
+        print("Generation ", generation, " | Mean rewards: ", int(np.mean(rewards)), " | Mean of top 5: ",int(np.mean(top_rewards[:5])), " | Mean of top ",top_limit," : ", int(np.mean(top_rewards[:top_limit])))
+        print("Top ",top_limit," scores", sorted_parent_indexes)
+        print("Rewards for top: ",np.array(top_rewards).astype(int))
+        
+        # setup an empty list for containing children agents
+        children_agents, elite_index = return_children(agents, sorted_parent_indexes, elite_index)
 
-    # kill all agents, and replace them with their children
-    agents = children_agents
-    
-    print("------------------------------------------------------------------------------")
-    print('')
-
-    # if(True):
-    #     env2 = gym.make(game, renders=True)
-    #     env2.reset()
-    #     run1([agents[elite_index]], env2, human=True)
+        # kill all agents, and replace them with their children
+        agents = children_agents
+        
+        print("------------------------------------------------------------------------------")
+        print('')
+        if(generation%5==4):
+            torch.save(agents[elite_index].fc, 'Elite.gameAI'+str(generation))

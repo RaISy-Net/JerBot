@@ -13,6 +13,7 @@ currentdir = os.path.dirname(os.path.abspath(
 parentdir = os.path.dirname(os.path.dirname(currentdir))
 os.sys.path.insert(0, parentdir)
 
+
 class luckyBipedEnv(gym.Env):
     metadata = {'render.modes': ['human']}
 
@@ -27,11 +28,10 @@ class luckyBipedEnv(gym.Env):
         #     np.finfo(np.float32).max,
         #     np.finfo(np.float32).max,
         #     np.finfo(np.float32).max])
-        action_high = np.array([1,1,1,1,1,1,1,1,1,1])
+        action_high = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
 
-
-        self.action_space = spaces.Box(low = -action_high, high = action_high)
-        self.observation_space = spaces.Box(low = -2, high = 2, shape=(20,))
+        self.action_space = spaces.Box(low=-action_high, high=action_high)
+        self.observation_space = spaces.Box(low=-2, high=2, shape=(20,))
 
         self.seed()
 
@@ -43,7 +43,7 @@ class luckyBipedEnv(gym.Env):
         self.timeStep = 1.0/240
         self.currentSimTime = 0.0
         #pybullet.setJointMotorControl2(self.cartpole, 1, pybullet.VELOCITY_CONTROL, force=0)
-        pybullet.setGravity(0, 0, -10)
+        pybullet.setGravity(0, 0, -50)
         # pybullet.setTimeStep(self.timeStep)
         pybullet.setRealTimeSimulation(0)
 
@@ -62,7 +62,8 @@ class luckyBipedEnv(gym.Env):
                       "bodyRot": rotmat,
                       "bodyPos": bodypos,
                       "bodyquat": bodyquat}
-        self.stateToReturn = np.array([self.state['JointPosition'],self.state['JointVelocity']]).flatten()
+        self.stateToReturn = np.array(
+            [self.state['JointPosition'], self.state['JointVelocity']]).flatten()
 
     def step(self, action):
         pybullet.stepSimulation()
@@ -94,12 +95,19 @@ class luckyBipedEnv(gym.Env):
         # we compute the dot product of 0 0 1 with upv
         # the angle between the global z axis and the z axis of the base is the arccos of this dotproduct
         # 0.95 ~ cos( 18.5° )
-        if(upv[2] < 0.8):
+        if(upv[2] < 0.9):
             hasFallenOrient = True
 
-        done = self.currentSimTime > 100.0 or hasFallen or hasFallenOrient or np.isnan(bodyx)
+        done = self.currentSimTime > 1000.0 or hasFallen or hasFallenOrient or np.isnan(
+            bodyx)
 
-        reward = np.nan_to_num(pos[0]-self.previousPos[0])*100
+        Wvel = 1.0
+        We = 0.05
+        delX = np.nan_to_num(pos[0]-self.previousPos[0])
+        delE = 0
+        for i in range(self.numJoints):
+            delE += pybullet.getJointState(self.dog, i)[3]
+        reward = Wvel*np.sign(delX)*max(abs(delX), 0.1)-We*delE
         # reward = 1
 
         if hasFallen or hasFallenOrient:
@@ -111,8 +119,9 @@ class luckyBipedEnv(gym.Env):
 
     def reset(self):
         self.currentSimTime = 0.0
-        pybullet.resetBasePositionAndOrientation(self.dog, [0, 0, 1.09], [0, 0, 0, 1])
-        for i in range(10):
+        pybullet.resetBasePositionAndOrientation(
+            self.dog, [0, 0, 1.09], [0, 0, 0, 1])
+        for i in range(self.numJoints):
             pybullet.resetJointState(self.dog, i, 0, 0)
 
         pos, rot = pybullet.getBasePositionAndOrientation(self.dog)
