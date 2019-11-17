@@ -102,8 +102,8 @@ class luckyBipedEnv(gym.Env):
         done = self.currentSimTime > 1000.0 or hasFallen or hasFallenOrient or np.isnan(
             bodyx)
 
-        Wvel = 1.0
-        We = 0.05
+        Wvel = 2.0
+        We = 0.05*0
         delX = np.nan_to_num(pos[0]-self.previousPos[0])
         delE = 0
         for i in range(self.numJoints):

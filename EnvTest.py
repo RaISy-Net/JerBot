@@ -10,10 +10,10 @@ for i_episode in range(1000):
     print('NEW EPISODE')
     env.reset()
     r = 0
-    for t in range(100):
+    for t in range(1000):
         sleep(0.01)
         action = env.action_space.sample()
-        # action = [0,0,0,0,0,0,0,0,0,0,0]
+        action = [0,0,0,0,0,0,0,0,0,0,0]
         observation, reward, done, info = env.step(action)
         r+=reward
         if done:

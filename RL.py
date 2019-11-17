@@ -131,7 +131,7 @@ def add_elite(agents, sorted_parent_indexes, elite_index=None):
     print("Elite selected with index ",top_elite_index, " and score", top_score)
     
     child_agent = copy.deepcopy(agents[top_elite_index])
-    return child_agent
+    return child_agent, top_score
     
 
 def mutate_each_param(param):
@@ -184,11 +184,11 @@ def return_children(agents, sorted_parent_indexes, elite_index):
     #now add one elite
     children_agents = children_agents.tolist()
     children_agents.pop(0)
-    elite_child = add_elite(agents, sorted_parent_indexes, elite_index)
+    elite_child, elite_score = add_elite(agents, sorted_parent_indexes, elite_index)
     children_agents.append(elite_child)
     elite_index=len(children_agents)-1 #it is the last one
     
-    return children_agents, elite_index
+    return children_agents, elite_index, elite_score
 
 # %time return_children(agents, sorted_parent_indexes, elite_index)
 
@@ -217,7 +217,7 @@ if __name__ == "__main__":
 
     # How many top agents to consider as parents
     top_limit = 20
-
+    best_top_score = -10000000000000000
     mutation_rate = 0.05
     #     mutation_power = 0.02 #hyper-parameter, set from https://arxiv.org/pdf/1712.06567.pdf  
 
@@ -243,7 +243,7 @@ if __name__ == "__main__":
         print("Rewards for top: ",np.array(top_rewards).astype(int))
         
         # setup an empty list for containing children agents
-        children_agents, elite_index = return_children(agents, sorted_parent_indexes, elite_index)
+        children_agents, elite_index, elite_score = return_children(agents, sorted_parent_indexes, elite_index)
 
         # kill all agents, and replace them with their children
         agents = children_agents
@@ -252,3 +252,6 @@ if __name__ == "__main__":
         print('')
         if(generation%5==4):
             torch.save(agents[elite_index].fc, 'Elite.gameAI'+str(generation))
+        if(elite_score > best_top_score):
+            best_top_score = elite_score
+            torch.save(agents[elite_index].fc, 'Elite.gameAI'+str(generation)+'_'+str(best_top_score))
