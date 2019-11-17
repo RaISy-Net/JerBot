@@ -43,9 +43,10 @@ class luckyBipedEnv(gym.Env):
         self.timeStep = 1.0/240
         self.currentSimTime = 0.0
         #pybullet.setJointMotorControl2(self.cartpole, 1, pybullet.VELOCITY_CONTROL, force=0)
-        pybullet.setGravity(0, 0, -50)
+        pybullet.setGravity(0, 0, -10)
         # pybullet.setTimeStep(self.timeStep)
         pybullet.setRealTimeSimulation(0)
+        self.reset()
 
     def seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -120,7 +121,7 @@ class luckyBipedEnv(gym.Env):
     def reset(self):
         self.currentSimTime = 0.0
         pybullet.resetBasePositionAndOrientation(
-            self.dog, [0, 0, 1.09], [0, 0, 0, 1])
+            self.dog, [0, 0, 1.09], [0, 0, 0.707, 0.707])
         for i in range(self.numJoints):
             pybullet.resetJointState(self.dog, i, 0, 0)
 
