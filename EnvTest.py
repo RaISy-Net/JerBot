@@ -10,7 +10,7 @@ for i_episode in range(1000):
     print('NEW EPISODE')
     env.reset()
     r = 0
-    for t in range(1000):
+    for t in range(100000):
         sleep(0.01)
         action = env.action_space.sample()
         action = [0,0,0,0,0,0,0,0,0,0,0]
@@ -20,7 +20,7 @@ for i_episode in range(1000):
             print("Episode finished after {} timesteps".format(t+1))
             break
     plt.scatter(i_episode, r)
-    plt.pause(0.05)
+    plt.pause(0.001)
 plt.show()
 env.close()
 
