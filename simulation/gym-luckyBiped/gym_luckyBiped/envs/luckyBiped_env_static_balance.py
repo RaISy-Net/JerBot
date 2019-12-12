@@ -34,6 +34,9 @@ class luckyBipedEnvStaticBalance(gym.Env):
             self.dog, [0, 0, 1.2], [0, 0, 0.707, 0.707])
         self.plane = pybullet.loadURDF(os.path.join(
             pybullet_data.getDataPath(), "plane.urdf"), 0, 0, 0)
+    
+        pybullet.changeDynamics(self.plane, -1, lateralFriction = 25)
+
         self.numJoints = pybullet.getNumJoints(self.dog)
         self.timeStep = 1.0/240
         self.currentSimTime = 0.0
