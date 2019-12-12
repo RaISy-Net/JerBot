@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 init_motor_vals = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 motor_vals = init_motor_vals.copy()
 
-env = gym.make('gym_luckyBiped:luckyBiped-v0', renders=True)
+env = gym.make('gym_luckyBiped:luckyBiped-v1', renders=True)
 observation = env.reset()
 
 
@@ -17,10 +17,10 @@ def joystick():
 
     if(rcvd_list[0] == 0):
         for i in range(4):
-            motor_vals[i] += int(rcvd_list[2+i])*0.05
+            motor_vals[i] = int(rcvd_list[2+i])
     elif(rcvd_list[0] == 1):
         for i in range(4):
-            motor_vals[i+4] += int(rcvd_list[2+i])*0.05
+            motor_vals[i+4] = int(rcvd_list[2+i])
     if(rcvd_list[1] == 1):
         motor_vals = init_motor_vals.copy()
         env.reset()
@@ -35,12 +35,13 @@ while True:
         print('NEW EPISODE')
         env.reset()
         r = 0
-        for t in range(100000):
-            sleep(0.001)
+        for t in range(3000):
+            # sleep(0.01)
             action = joystick()
+            observation, reward, done, info = env.step(action, 1000)
+
+            # print(action, [int(i*100)/100 for i in observation])
             
-            observation, reward, done, info = env.step(action)
-            print(action, [int(i*100)/100 for i in observation])
             r += reward
             if done:
                 print("Episode finished after {} timesteps".format(t+1))
