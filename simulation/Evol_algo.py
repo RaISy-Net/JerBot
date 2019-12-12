@@ -110,7 +110,7 @@ def run_agents_n_times(agents, runs):
 
 
 def add_elite(agents, sorted_parent_indexes, elite_index=None):
-    only_consider_top_n = 10
+    only_consider_top_n = 20
     print('Only considering top ', only_consider_top_n, ' for elite selection.')
     candidate_elite_index = sorted_parent_indexes[:only_consider_top_n]
     if(elite_index is not None):
@@ -122,7 +122,7 @@ def add_elite(agents, sorted_parent_indexes, elite_index=None):
     for i in candidate_elite_index:
         candidate_elite_agents.append(agents[i])
     candidate_elite_agents = np.array(candidate_elite_agents)
-    times = 3
+    times = 1
     rewards = run_agents_n_times(candidate_elite_agents, times)
     # [score, score, score, .., score]
     print('Running each elite candidate ', times, ' times.')
