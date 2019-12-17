@@ -3,7 +3,7 @@ import pybullet
 
 import matplotlib.pyplot as plt 
 
-agent = torch.load('agents/Elite.gameAI41_166.40800000003173')
+agent = torch.load('agents/Elite.gameAI89_6.7039999999990485')
 
 game = 'gym_luckyBiped:luckyBiped-v1'
 env = gym.make(game, renders=True)

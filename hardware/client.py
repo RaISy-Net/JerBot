@@ -12,7 +12,7 @@ def recv_from_Rpi(msgSize):
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 print(socket.gethostbyname(socket.gethostname()))
-s.connect(('10.42.0.100', 2019))
+s.connect(('10.42.0.139', 2019))
 
 # if __name__ == "__main__":
 #     while True:

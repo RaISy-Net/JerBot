@@ -92,7 +92,7 @@ class luckyBipedEnvStaticBalance(gym.Env):
         # 0.95 ~ cos( 18.5° )
         if(upv[2] < 0.9):
             hasFallenOrient = True
-        hasFallen = self.state["bodyPos"][2] < 0.2
+        hasFallen = self.state["bodyPos"][2] < 0.85
         done = self.timesRun > max_steps or hasFallen or hasFallenOrient or np.isnan(
             bodyx)
 

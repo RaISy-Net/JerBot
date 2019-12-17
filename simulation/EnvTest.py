@@ -3,7 +3,7 @@ from time import sleep
 import pybullet
 import matplotlib.pyplot as plt
 
-env = gym.make('gym_luckyBiped:luckyBiped-v1', renders = True, realWorld = 0)
+env = gym.make('gym_luckyBiped:luckyBiped-v0', renders = True, realWorld = 0)
 observation = env.reset()
 
 for i_episode in range(1000):
