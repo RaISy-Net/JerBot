@@ -55,7 +55,7 @@ def return_random_agents(num_agents):
     return agents
 
 
-def run1(agents, envi, human=False, delaytime=1):
+def run1(agents, envi, human=False, delaytime=1, no_of_steps = 200000):
     reward_agents = []
     for agent in agents:
         agent.eval()  # I think to set it to evaluation mode and not to training mode
@@ -69,7 +69,7 @@ def run1(agents, envi, human=False, delaytime=1):
             action = agent(inp).detach().numpy()[0]
             for i in range(len(action)):
                 action[i] *= envi.action_space.high[i]
-            observation, reward, done, info = envi.step(action, 200000)
+            observation, reward, done, info = envi.step(action, no_of_steps)
             rew = rew+reward
             if(done):
                 break

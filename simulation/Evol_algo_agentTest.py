@@ -9,4 +9,4 @@ game = 'gym_luckyBiped:luckyBiped-v1'
 env = gym.make(game, renders=True)
 
 for i in range(20):
-    print(run1([agent], env))
+    print(run1([agent], env, human = False, no_of_steps = 80000))
