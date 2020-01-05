@@ -12,3 +12,6 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 * The required electronics framework is done and tested and is ready for experimentation.
 * Experimenting with PPO and other state of the are RL algorithms and Evolution strategy based techniques to deduce a   viable and robust controller for the robot.
 
+## Acknowledgement and recognitions:
+* The above project was entirely funded by the Science and Technology Council (SnTC) of IIT(BHU),Varanasi.
+* We got to showcase our project in the InterIIT Techmeet 8.0 hosted by IIT Roorkee on December 2019.[Report]()
