@@ -14,4 +14,4 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 
 ## Acknowledgement and recognitions:
 * The above project was entirely funded by the Science and Technology Council (SnTC) of IIT(BHU),Varanasi.
-* We got to showcase our project in the InterIIT Techmeet 8.0 hosted by IIT Roorkee on December 2019.[Report](Engineer's Conclave Report_BipedBot-converted.pdf)
+* We got to showcase our project in the InterIIT Techmeet 8.0 hosted by IIT Roorkee on December 2019.[Report](https://github.com/lok-i/JerBot/edit/master/Engineer's Conclave Report_BipedBot-converted.pdf)
