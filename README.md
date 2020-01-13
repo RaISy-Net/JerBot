@@ -1,6 +1,6 @@
 # JerBot
 <p align="center">
-   <img width="500" height="400" src="https://github.com/lok-i/JerBot/blob/master/Main_title.jpg">
+   <img width="600" height="350" src="https://github.com/lok-i/JerBot/blob/master/Main_title.jpg">
 </p>
 
 ## Project abstract:
