@@ -7,11 +7,14 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 <p align="center">
    <img width="250" height="458" src="https://github.com/lok-i/JerBot/blob/master/dynamic.gif">
    <img width="250" height="458" src="https://github.com/lok-i/JerBot/blob/master/gif_3.gif">
- </p>
+</p>
+
 ### Load Test:
+
 <p align="center">
    <img width="250" height="458" src="https://github.com/lok-i/JerBot/blob/master/load_test.gif">
 </p>
+
 ### Gallery:
 
 
