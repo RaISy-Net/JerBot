@@ -2,6 +2,14 @@
 
 ## Project abstract:
 Building cyber-physical systems that are mobile and robust has been one of mankind's unsolved challenges. In our project, we are trying to explore an unconventional design for a biped robot which is devised from a desert rodent called Jerboa. This little rodent has come under the limelight of the scientific community in recent years. The robust and unpredictable gait of Jerboa is considered a viable fix to the problems that we are facing with current humanoid type biped design. We are currentlu using Reinforcement learning techniques for making the agent learn complex gait sequences by itself and to bring out new ways of locomotion achievable that even we humans are unaware of. The sole motive behind this project is to make individual units that can be extensively deployed in areas that are quite hazardous and unreachable for humans. We are aiming at making these robots as cheap as possible so that they are compromisable in extreme conditions like in recovery missions, space exploration, etc.
+## A Brief Overview:
+
+<p align="left">
+   <img width="278" height="301" src="https://github.com/lok-i/DRLPathPlanner/blob/master/empty-env.png"
+ </p>
+<p align="right">
+   <img width="278" height="301" src="https://github.com/lok-i/DRLPathPlanner/blob/master/empty-env.png"
+ </p>
 
 ## Our Work:
 * Built our own custom OpenAI gym-environment for simulation.[Github Repo](https://github.com/lok-i/BlackBird-gym)
