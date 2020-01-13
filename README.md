@@ -7,8 +7,8 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 <p align="left">
    <img width="278" height="301" src="https://github.com/lok-i/DRLPathPlanner/blob/master/empty-env.png"
  </p>
-<p align="right">
-   <img width="164" height="300" src="https://github.com/lok-i/JerBot/blob/master/dynamic.gif"
+<p align="center">
+   <img width="250" height="458" src="https://github.com/lok-i/JerBot/blob/master/dynamic.gif"
  </p>
 
 ## Our Work:
