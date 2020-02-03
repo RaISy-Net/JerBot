@@ -35,7 +35,7 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 
 
 ## Our Work:
-* Built our own custom OpenAI gym-environment for simulation.[Github Repo](https://github.com/lok-i/BlackBird-gym)
+* Built our own custom OpenAI gym-environment for the simulation.[Github Repo](https://github.com/lok-i/BlackBird-gym)
 * Fabricated our first hardware prototype and is under mechanical structure strength validation phase.
 * The required electronics framework is done and tested and is ready for experimentation.
 * Experimenting with PPO and other state of the are RL algorithms and Evolution strategy based techniques to deduce a   viable and robust controller for the robot.
