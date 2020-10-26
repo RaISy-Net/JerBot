@@ -37,7 +37,7 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 ## Our Work:
 
 <p align="center">
-   <img width="250" height="458" src="https://github.com/RaISy-Net/JerBot/blob/master/cassie.gif">
+   <img width="250" height="350" src="https://github.com/RaISy-Net/JerBot/blob/master/cassie.gif">
 </p>
 
 
