@@ -35,10 +35,17 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 
 
 ## Our Work:
+
+<p align="center">
+   <img width="250" height="458" src="https://github.com/RaISy-Net/JerBot/blob/master/cassie.gif">
+</p>
+
+
+* Extending the framework to such dynamic robots like Cassie
 * Built our own custom OpenAI gym-environment for the simulation.[Github Repo](https://github.com/lok-i/BlackBird-gym)
 * Fabricated our first hardware prototype and is under the mechanical structure strength validation phase.
 * The required electronics framework is done and tested and is ready for experimentation.
-* Experimenting with PPO and other state-of-the are RL algorithms and Evolution strategy based techniques to deduce a   viable and robust controller for the robot.
+* Experimenting with PPO and other state-of-the are RL algorithms and Evolution strategy based techniques to deduce a viable and robust controller for the robot.
 
 ## Acknowledgement and recognitions:
 * The above project was entirely funded by the Science and Technology Council (SnTC) of IIT (BHU) Varanasi.
