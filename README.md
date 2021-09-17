@@ -8,13 +8,7 @@ Building cyber-physical systems that are mobile and robust has been one of manki
 
 ## Full demo:
 
-<!-- <p align="center"> -->
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/nnmxCUnQBLk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-<!-- </p> -->
-
-<!-- [Watch the video](https://www.youtube.com/watch?v=nnmxCUnQBLk&feature=youtu.be) -->
+[Watch the video](https://www.youtube.com/watch?v=nnmxCUnQBLk&feature=youtu.be)
 
 ## A Brief Overview:
 
