@@ -7,7 +7,12 @@
 Building cyber-physical systems that are mobile and robust has been one of mankind's unsolved challenges. In our project, we are trying to explore an unconventional design for a biped robot that is devised from a desert rodent called Jerboa. This little rodent has come under the limelight of the scientific community in recent years. Jerboa's robust and unpredictable gait is considered a viable fix to the problems we face with the current humanoid type biped design. We are currently using Reinforcement learning techniques to make the agent learn complex gait sequences by itself and bring out new ways of locomotion achievable that even we humans are unaware. This project's sole motive is to make individual units that can be extensively deployed in areas that are quite hazardous and unreachable for humans. We aim to make these robots as cheap as possible so that they are compromisable in extreme conditions like in recovery missions, space exploration, etc.
 
 ## Full demo:
-[Watch the video](https://www.youtube.com/watch?v=nnmxCUnQBLk&feature=youtu.be)
+
+<p align="center">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nnmxCUnQBLk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p>
+
+<!-- [Watch the video](https://www.youtube.com/watch?v=nnmxCUnQBLk&feature=youtu.be) -->
 
 ## A Brief Overview:
 
